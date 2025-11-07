@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>OnlyVet — Онлайн-ветклиника</title>
+<meta content="OnlyVet — онлайн-ветеринарная клиника: быстрые консультации, триаж, повторные визиты, рекомендации по уходу. Работает на базе Vetmanager." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css?v=rv2" rel="stylesheet"/></head>
+<body>
+<header aria-label="Главная навигация">
+<div class="container nav">
+<a class="logo" href="#top">OnlyVet</a>
+<nav aria-label="Основные разделы" class="nav-center">
+<a href="#services">Услуги</a>
+<a href="#doctors">Врачи</a>
+<a href="#reviews">Отзывы</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Контакты</a>
+</nav>
+<div class="nav-right hamb">
+<button aria-label="Меню" class="btn ghost" id="hamburger">☰</button>
+<button aria-controls="modal-book" aria-haspopup="dialog" class="btn-main open-book">Записаться</button>
+</div>
+</div>
+<div class="mobile-menu" id="mobile-menu">
+<a href="#services">Услуги</a>
+<a href="#doctors">Врачи</a>
+<a href="#reviews">Отзывы</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Контакты</a>
+</div>
+</header>
+<main id="top">
+<section class="hero">
+<div class="container hero-grid">
+<div>
+<span class="tag">Онлайн-ветеринарная клиника</span>
+<h1>Забота о питомце — онлайн. Быстро, бережно, профессионально.</h1>
+<p>Первичный триаж, рекомендации по уходу и повторные консультации. Работаем на базе Vetmanager. Время отклика — до 5 минут в часы работы.</p>
+<div style="display:flex;gap:12px;margin-top:14px">
+<button aria-controls="modal-book" aria-haspopup="dialog" class="btn" id="btn-book-hero">Записаться на консультацию</button>
+<a class="btn ghost" href="#services">Посмотреть услуги</a>
+</div>
+<div class="hero-stats">
+<div class="card"><strong>15–20 мин</strong><br/><span class="muted">длительность быстрой консультации</span></div>
+<div class="card"><strong>24/7</strong><br/><span class="muted">заявка — в любое время</span></div>
+<div class="card"><strong>Vetmanager</strong><br/><span class="muted">карта пациента и запись</span></div>
+</div>
+</div>
+<figure class="hero-visual">
+<img alt="Ветеринарный врач осматривает питомца в клинике" class="img-cover" src="assets/photos/hero.jpg"/>
+</figure>
+</div>
+</section>
+<section id="services">
+<div class="container">
+<div class="section-head"><h2>Услуги</h2><p class="muted">Прозрачные форматы и фиксированные цены.</p></div>
+<div class="grid-3">
+<article class="service"><div class="thumb"><img alt="Онлайн-консультация" class="img-cover" loading="lazy" src="assets/photos/service-telemed.jpg"/></div><span class="tag">15–20 мин</span><h3>Быстрая консультация</h3><p class="muted">Оценка симптомов, triage, рекомендации, чек-лист наблюдения.</p><p class="price">1 490 ₽</p><button class="btn open-book">Выбрать время</button></article>
+<article class="service"><div class="thumb"><img alt="Повторная консультация" class="img-cover" loading="lazy" src="assets/photos/service-followup.jpg"/></div><span class="tag">до 15 мин</span><h3>Повторная консультация</h3><p class="muted">Разбор динамики, корректировка рекомендаций, поддержка владельца.</p><p class="price">990 ₽</p><button class="btn open-book">Записаться</button></article>
+<article class="service"><div class="thumb"><img alt="Срочный триаж" class="img-cover" loading="lazy" src="assets/photos/service-triage.jpg"/></div><span class="tag">10 мин</span><h3>Срочный триаж</h3><p class="muted">Быстро определим, нужно ли срочно ехать в клинику и что взять с собой.</p><p class="price">790 ₽</p><button class="btn open-book">Начать</button></article>
+<article class="service">
+<div class="thumb">
+<img alt="Второе мнение по лечению" class="img-cover" decoding="async" loading="lazy" src="assets/photos/service-followup.jpg"/>
+</div>
+<span class="tag">20–30 мин</span>
+<h3>Второе мнение</h3>
+<p class="muted">Разбор истории болезни и назначений, альтернативные подходы, ответы на вопросы владельца.</p>
+<p class="price">1 990 ₽</p>
+<button class="btn open-book">Записаться</button>
+</article>
+<article class="service">
+<div class="thumb">
+<img alt="Подбор питания и рациона" class="img-cover" decoding="async" loading="lazy" src="assets/photos/service-triage.jpg"/>
+</div>
+<span class="tag">20–25 мин</span>
+<h3>Подбор питания</h3>
+<p class="muted">Индивидуальный рацион: лечебные и повседневные корма, расчёт порций, схема перехода.</p>
+<p class="price">1 290 ₽</p>
+<button class="btn open-book">Записаться</button>
+</article>
+</div><div class="services-square-nav"><button aria-label="Назад" id="services-prev" type="button">◀</button><button aria-label="Вперёд" id="services-next" type="button">▶</button></div>
+</div>
+</section>
+<section id="doctors">
+<div class="container">
+<div class="section-head"><h2>Врачи</h2><p class="muted">Опытные специалисты по направлениям.</p></div>
+<div class="grid-3">
+<div class="doctor">
+<img alt="Портрет Анны Котовой" class="avatar-img" loading="lazy" src="assets/photos/doctor-anna.jpg"/>
+<div>
+<strong>Анна Котова</strong>
+<span class="muted">Ветврач, дерматология • 7 лет</span>
+<div class="chips">
+<span class="chip">Дерматология</span>
+<span class="chip">Терапия</span>
+</div>
+<span class="hint">RUVet № 000000</span>
+<button class="btn mini open-book">Записаться</button>
+</div>
+</div>
+<div class="doctor">
+<img alt="Портрет Ильи Демидова" class="avatar-img" loading="lazy" src="assets/photos/doctor-ilya.jpg"/>
+<div>
+<strong>Илья Демидов</strong>
+<span class="muted">Ветврач‑реаниматолог • 9 лет</span>
+<div class="chips">
+<span class="chip">Неотложка</span>
+<span class="chip">Триаж</span>
+</div>
+<span class="hint">RUVet № 000001</span>
+<button class="btn mini open-book">Записаться</button>
+</div>
+</div>
+<div class="doctor">
+<img alt="Портрет Натальи Соколовой" class="avatar-img" loading="lazy" src="assets/photos/doctor-natalia.jpg"/>
+<div>
+<strong>Наталья Соколова</strong>
+<span class="muted">Зоопсихолог, нутрициолог • 6 лет</span>
+<div class="chips">
+<span class="chip">Повед. терапия</span>
+<span class="chip">Нутрициология</span>
+</div>
+<span class="hint">RUVet № 000002</span>
+<button class="btn mini open-book">Записаться</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="reviews">
+<div class="container">
+<div class="section-head"><h2>Отзывы</h2><p class="muted">Нас рекомендуют владельцы кошек и собак.</p></div>
+<div class="grid-3 is-carousel">
+<div class="review"><div class="user"><img alt="" class="img-cover" loading="lazy" src="assets/photos/review-dog.jpg"/></div><div class="review-content"><p>«Помогли понять, что делать ночью, когда у пса началась рвота. Спокойно объяснили и подсказали, когда ехать в клинику.»</p><span class="hint">— Марина</span></div></div>
+<div class="review"><div class="user"><img alt="" class="img-cover" loading="lazy" src="assets/photos/review-cat.jpg"/></div><div class="review-content"><p>«Дали план ухода после стерилизации, всё по пунктам. Большое спасибо врачу.»</p><span class="hint">— Алексей</span></div></div>
+<div class="review"><div class="user"><img alt="" class="img-cover" loading="lazy" src="assets/photos/review-owner.jpg"/></div><div class="review-content"><p>«Удобно: запись, оплата и видео — в одном месте. Повторный визит оформили за минуту.»</p><span class="hint">— Екатерина</span></div></div>
+</div><div class="reviews-nav"><button aria-label="Предыдущий отзыв" class="reviews-btn prev" type="button">◀</button><button aria-label="Следующий отзыв" class="reviews-btn next" type="button">▶</button></div>
+</div>
+</section>
+<section id="faq">
+<div class="container">
+<div class="section-head"><h2>FAQ</h2><p class="muted">Частые вопросы о дистанционных консультациях.</p></div>
+<div class="faq-list">
+<div class="faq-item"><div class="faq-q"><strong>Это заменяет очный осмотр?</strong><span>+</span></div><div class="faq-a">Нет. Онлайн‑консультация носит рекомендательный характер и не заменяет очный приём. При признаках неотложного состояния мы направим вас в ближайшую клинику.</div></div>
+<div class="faq-item"><div class="faq-q"><strong>Как происходит запись и оплата?</strong><span>+</span></div><div class="faq-a">Вы выбираете слот во встроенном виджете Vetmanager и оплачиваете онлайн. Чек приходит на e‑mail/в мессенджер.</div></div>
+<div class="faq-item"><div class="faq-q"><strong>Какие данные нужны?</strong><span>+</span></div><div class="faq-a">Контакты, имя питомца, возраст, вес, краткое описание симптомов и, по возможности, фото/видео.</div></div>
+<div class="faq-item"><div class="faq-q"><strong>Могу ли вернуть оплату?</strong><span>+</span></div><div class="faq-a">Да, согласно правилам сервиса: до начала консультации — полный возврат; после — пропорционально оказанной части услуги.</div></div>
+</div>
+</div>
+</section>
+<section class="cta">
+<div class="container">
+<div class="cta-glass">
+<div><h2>Готовы помочь вашему питомцу уже сегодня</h2><p class="muted">Выберите удобное время, прикрепите фото/видео и получите рекомендации от ветеринарного врача.</p></div>
+<div style="text-align:right"><button class="btn open-book">Записаться онлайн</button></div>
+</div>
+</div>
+</section>
+<section id="contact">
+<!-- Обратная связь -->
+<div class="container" id="feedback">
+<div class="section-head"><h2>Обратная связь</h2><p class="muted">Пишите — ответим быстро в часы работы.</p></div>
+<form id="contact-form" novalidate="">
+<div><label for="name">Имя</label><input id="name" name="name" placeholder="Ваше имя" required="" type="text"/></div>
+<div><label for="phone">Телефон</label><input id="phone" name="phone" placeholder="+7 (___) ___-__-__" required="" type="tel"/></div>
+<div><label for="msg">Сообщение</label><textarea id="msg" name="msg" placeholder="Кратко опишите вопрос" rows="4"></textarea></div>
+<div></div>
+<div class="form-agree">
+<label class="checkbox-label" for="pdn">
+<input id="pdn" required="" type="checkbox"/>
+<span>Я даю согласие на обработку персональных данных</span>
+</label>
+<p class="hint">
+    Данные хранятся в РФ. <a href="#!" rel="noopener" target="_blank">Политика обработки ПДн</a>
+</p>
+</div>
+<div class="form-actions">
+<button class="btn submit-btn" disabled="" type="submit">Отправить</button>
+</div>
+</form>
+</div>
+<!-- Контакты -->
+<div class="container" id="info">
+<div class="section-head"><h2>Контакты</h2></div>
+<div class="card contact-grid">
+<div class="contact-info">
+<p><strong>Режим:</strong> 08:00–23:00 (Мск)</p>
+<p><strong>Телефон:</strong> +7 (000) 000-00-00</p>
+<p><strong>Телеграм:</strong> @onlyvet</p>
+<p><strong>Адрес:</strong> онлайн‑клиника (Россия)</p>
+<p class="muted">Оплата: карты, СБП. Чеки по 54‑ФЗ.</p>
+<div style="margin-top:10px"><span class="kbd">Vetmanager</span> • запись и карта пациента</div>
+</div>
+<div class="map-embed">
+<iframe allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=55.7558,37.6173&amp;z=12&amp;output=embed"></iframe>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Modal -->
+<div aria-hidden="true" aria-label="Онлайн-запись" aria-modal="true" class="modal" id="modal-book" role="dialog">
+<div class="modal-card">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+<h3 style="margin:0">Онлайн-запись</h3>
+<button aria-label="Закрыть" class="btn ghost" id="close-book">Закрыть</button>
+</div>
+<div class="card">
+<p class="muted" style="margin-top:0">Здесь будет встроен виджет Vetmanager записи/оплаты.</p>
+<div class="card" style="height:360px;display:flex;align-items:center;justify-content:center;border-style:dashed">
+<span class="muted">Вставьте код виджета Vetmanager</span>
+</div>
+</div>
+</div>
+</div>
+<footer>
+<div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+<div>© <span id="year"></span> OnlyVet</div>
+<div style="display:flex;gap:16px">
+<a aria-label="Публичная оферта" href="#!">Оферта</a>
+<a aria-label="Политика ПДн" href="#!">Политика ПДн</a>
+<a aria-label="Правила сервиса" href="#!">Правила сервиса</a>
+</div>
+</div>
+</footer>
+<div aria-label="Согласие на обработку данных" aria-live="polite" class="cookie" id="cookie-banner" role="dialog">
+<div style="flex:1">Мы используем файлы cookie и обрабатываем персональные данные для работы сайта и записи на консультацию. Подробнее в <a href="#!">политике</a>.</div>
+<button id="cookie-accept">Согласен</button>
+</div>
+<script src="app.js?v=rv2"></script></body>
+</html>
