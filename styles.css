@@ -1252,7 +1252,7 @@ button.submit-btn:disabled {
 
 
 /* === BENEFITS BLOCK (OnlyVet style) === */
-#benefits{ background: #f8fbff; padding: 26px 0; }
+#benefits { background: transparent; padding: 26px 0; }
 #benefits .section-title{ text-align:center; margin: 0 0 18px 0; }
 #benefits .benefits-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:18px; }
 @media (max-width: 1020px){ #benefits .benefits-grid{ grid-template-columns: repeat(2,1fr); } }
