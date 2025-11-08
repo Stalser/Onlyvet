@@ -852,3 +852,303 @@ button.submit-btn:disabled {
   transform: none;
   box-shadow: none;
 }
+
+
+/* === CONTACT FORM FIX FINAL === */
+.form-agree {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.form-agree .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.form-agree input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--brand);
+  cursor: pointer;
+}
+.form-agree .hint {
+  font-size: 14px;
+  color: var(--muted);
+  margin-left: 26px;
+  line-height: 1.4;
+}
+.form-agree .hint a {
+  color: var(--brand);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s;
+}
+.form-agree .hint a:hover { border-color: var(--brand); }
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+button.submit-btn {
+  background: linear-gradient(135deg, var(--brand), #7e8fff);
+  color: #fff;
+  padding: 12px 28px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(37,99,235,.25);
+  transition: all .2s ease;
+}
+button.submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(37,99,235,.35);
+}
+button.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* === CONTACT FORM ALIGN FIX === */
+#feedback #contact-form{ display:grid; grid-template-columns: 1fr; row-gap: 12px; }
+#feedback .form-agree{ margin-top: 10px; margin-bottom: 4px; }
+#feedback .form-agree .hint{ margin-left: 26px; margin-top: 2px; margin-bottom: 0; }
+#feedback .form-actions{ margin-top: 0; padding-top: 0; display:flex; justify-content:flex-end; }
+#feedback .form-actions .submit-btn{ align-self: center; }
+
+
+/* === CONTACT FORM FOOTER LAYOUT === */
+#feedback #contact-form .form-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-top: 8px;
+}
+#feedback #contact-form .form-footer .form-agree{
+  margin:0;
+  max-width: 70ch;
+}
+#feedback #contact-form .form-footer .form-actions{
+  margin:0;
+  padding:0;
+  flex:0 0 auto;
+}
+#feedback #contact-form .form-footer .submit-btn{
+  min-width: 180px;
+}
+
+/* Stack on narrow screens */
+@media (max-width: 720px){
+  #feedback #contact-form .form-footer{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+  }
+  #feedback #contact-form .form-footer .form-actions{
+    justify-content:flex-start;
+  }
+  #feedback #contact-form .form-footer .submit-btn{
+    width:100%;
+  }
+}
+
+
+/* === TEXTAREA AUTOSIZE === */
+#contact-form textarea {
+  overflow: hidden;       /* скрываем нативный скролл, будем управлять высотой */
+  resize: none;           /* ручное изменение не нужно при автосайзе */
+  transition: height .12s ease;
+  min-height: 120px;      /* базовая высота по умолчанию */
+  max-height: 50vh;       /* ограничение сверху, чтобы форма не «улетала» */
+}
+
+#contact-form input[type="email"]{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* === EMAIL FIELD STYLE match others === */
+#contact-form label[for="email"]{
+  display:block;
+  font-weight:600;
+  margin:12px 0 6px;
+}
+#contact-form input[type="email"]{
+  appearance:none;
+  width:100%;
+  padding:12px 16px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:var(--ink);
+  font:inherit;
+  box-sizing:border-box;
+  outline:none;
+  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+#contact-form input[type="email"]::placeholder{ color: var(--muted); }
+#contact-form input[type="email"]:focus{
+  border-color:#93c5fd;
+  box-shadow:0 0 0 4px rgba(59,130,246,.15);
+}
+
+
+/* === REVIEWS READ-MORE CLAMP === */
+#reviews .review-content p{ line-height: 1.7; }
+#reviews .review-content:not(.expanded) p{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5; /* показываем ~5 строк до кнопки */
+  overflow: hidden;
+}
+#reviews .review-toggle{
+  margin-top: 6px;
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:6px 10px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#fff; color:var(--ink);
+  font-weight:600; cursor:pointer; transition:.2s ease;
+  box-shadow:0 1px 3px rgba(15,23,42,.06);
+}
+#reviews .review-toggle:hover{ transform:translateY(-1px); box-shadow:0 3px 10px rgba(37,99,235,.12); border-color:#c7d2fe; }
+
+
+/* === REVIEWS PATCH v5: centered layout, bigger avatar, smooth expand === */
+#reviews .review{
+  display:flex; align-items:center; gap:18px;
+  padding:18px;
+}
+#reviews .review .user{
+  flex:0 0 170px; width:170px; height:170px; border-radius:18px; overflow:hidden;
+}
+#reviews .review .user img{ width:100%; height:100%; object-fit:cover; display:block; }
+#reviews .review .review-content{
+  flex:1 1 auto; display:flex; flex-direction:column; align-items:center; text-align:center;
+  overflow:hidden; transition:max-height .25s ease;
+}
+#reviews .review .review-content p{ line-height:1.8; }
+#reviews .review .review-toggle{
+  margin-top:8px; display:inline-flex; align-items:center; justify-content:center;
+  padding:6px 10px; border-radius:10px; border:1px solid var(--line);
+  background:#fff; color:var(--ink); font-weight:600; cursor:pointer; transition:.2s ease;
+  box-shadow:0 1px 3px rgba(15,23,42,.06);
+}
+#reviews .review .review-toggle:hover{ transform:translateY(-1px); box-shadow:0 3px 10px rgba(37,99,235,.12); border-color:#c7d2fe; }
+
+
+/* === REVIEWS PATCH v6: taller baseline + robust centering === */
+#reviews .review{ display:flex; align-items:center; gap:18px; padding:18px; } /* чуть выше, чтобы кламп виден корректно */
+#reviews .review .review-content{ overflow:hidden; transition:max-height .25s ease; }
+
+
+/* === REVIEWS PATCH v7: compact by default, grow only when expanded === */
+#reviews .review .user{ flex:0 0 170px; width:170px; height:170px; border-radius:18px; overflow:hidden; }
+#reviews .review .user img{ width:100%; height:100%; object-fit:cover; display:block; }
+#reviews .review .review-content{ flex:1 1 auto; display:flex; flex-direction:column; align-items:center; text-align:center; overflow:hidden; transition:max-height .25s ease; }
+#reviews .review .review-content p{ line-height:1.8; }
+#reviews .review .review-toggle{ margin-top:8px; display:inline-flex; align-items:center; justify-content:center; padding:6px 10px; border-radius:10px; border:1px solid var(--line); background:#fff; color:var(--ink); font-weight:600; cursor:pointer; transition:.2s ease; box-shadow:0 1px 3px rgba(15,23,42,.06); }
+#reviews .review .review-toggle:hover{ transform:translateY(-1px); box-shadow:0 3px 10px rgba(37,99,235,.12); border-color:#c7d2fe; }
+
+
+/* === DOCTORS: avatar placeholder === */
+#doctors .avatar-placeholder{
+  width:96px; height:96px;
+  border-radius:12px;
+  background:#f1f5f9;
+  color:#64748b;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; letter-spacing:.5px;
+  text-transform:uppercase;
+  user-select:none;
+}
+
+
+/* === DOCTORS NAV like SERVICES === */
+#doctors .grid-3.is-carousel{
+  display:flex; gap:16px; overflow-x:auto;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  padding-bottom:8px; scrollbar-width:none; -ms-overflow-style:none;
+}
+#doctors .grid-3.is-carousel::-webkit-scrollbar{ display:none; }
+
+
+#doctors .doctors-nav{
+  display:flex; align-items:center; justify-content:center; gap:12px; margin-top:10px;
+}
+#doctors .sc-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:46px; height:46px;
+  background:#fff; color:#111;
+  border:1px solid #d1d5db; border-radius:10px;
+  font-size:22px; font-weight:600;
+  box-shadow:0 2px 6px rgba(0,0,0,.1), 0 0 8px rgba(255,255,255,.8) inset;
+  cursor:pointer; transition:.2s ease;
+}
+#doctors .sc-btn:hover{ background:#f4f4f4; transform:translateY(-1px); box-shadow:0 4px 10px rgba(0,0,0,.15), 0 0 10px rgba(255,255,255,.9) inset; }
+#doctors .sc-btn:disabled{ opacity:.5; cursor:default; transform:none; box-shadow:none; }
+
+/* Avatar sizing to match existing .avatar-img */
+#doctors .avatar-img{
+  width:96px; height:96px; border-radius:12px; object-fit:cover; display:block; background:#f1f5f9; color:#64748b;
+}
+/* Make placeholder text centered inside the avatar block */
+#doctors .avatar-placeholder{
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; letter-spacing:.5px; text-transform:uppercase; user-select:none;
+}
+
+
+/* === DOCTORS CARDS LIKE SERVICES === */
+#doctors .grid-3.is-carousel{
+  display:flex; gap:16px; overflow-x:auto;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  padding-bottom:8px; scrollbar-width:none; -ms-overflow-style:none;
+}
+#doctors .grid-3.is-carousel::-webkit-scrollbar{ display:none; }
+/* show multiple cards like services */
+#doctors .grid-3.is-carousel > .doctor{
+  flex: 0 0 calc(32% - 8px);
+  min-width: 280px;
+  scroll-snap-align: start;
+}
+@media (max-width: 900px){
+  #doctors .grid-3.is-carousel > .doctor{
+    flex: 0 0 80%;
+    min-width: 280px;
+  }
+}
+
+
+/* === DOCTORS SPACING FIX === */
+/* Карточка врача — те же внутренние отступы и вертикальная колонка, как у соседних */
+#doctors .doctor{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:16px 18px;
+}
+/* Аватар: один размер и отступы для img и placeholder */
+#doctors .doctor > .avatar-img{
+  width: 240px;
+  height: 240px;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+  background:#eef2f7;
+  color:#64748b;
+  margin: 12px 0 10px 0; /* как у соседней карточки */
+  box-shadow: 0 1px 0 rgba(17,24,39,0.03) inset;
+}
+/* Текстовые блоки — компактные интервалы */
+#doctors .doctor > div > strong{ margin-top: 6px; margin-bottom: 6px; display:block; text-align:center; }
+#doctors .doctor .muted{ display:block; text-align:center; margin-bottom: 10px; }
+#doctors .doctor .chips{ justify-content:center; }

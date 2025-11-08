@@ -201,3 +201,280 @@ document.getElementById('year').textContent = new Date().getFullYear();
   setIndex(idx(), false);
   start();
 })();
+
+
+// === TEXTAREA AUTOSIZE (grow/shrink to content, restore to base) ===
+(function(){
+  const ta = document.querySelector('#contact-form textarea');
+  if(!ta) return;
+
+  const style = window.getComputedStyle(ta);
+  const baseMin = parseFloat(style.minHeight || '120'); // baseline from CSS
+  function autosize(){
+    ta.style.height = 'auto';                // сброс до авто
+    const next = Math.min(ta.scrollHeight, window.innerHeight * 0.5); // не выше 50vh
+    ta.style.height = Math.max(next, baseMin) + 'px';
+  }
+
+  // Инициализация и события
+  autosize();
+  ['input','change'].forEach(ev=> ta.addEventListener(ev, autosize));
+  // Пересчитать при изменении шрифтов/размеров
+  window.addEventListener('resize', autosize);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(autosize); }
+})();
+
+
+// === CONTACT FORM: require valid email + PDN to enable submit ===
+(function(){
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+  const email = form.querySelector('#email');
+  const pdn = document.getElementById('pdn');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  if (!email || !pdn || !submitBtn) return;
+
+  function isEmailValid(v){
+    if (!v) return false;
+    // use browser validity first
+    if (email.validity) return email.validity.valid;
+    // fallback simple regex
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  function updateState(){
+    const ok = pdn.checked && isEmailValid(email.value.trim());
+    submitBtn.disabled = !ok;
+  }
+
+  ['input','change','blur'].forEach(ev=> email.addEventListener(ev, updateState));
+  pdn.addEventListener('change', updateState);
+  // init
+  updateState();
+})();
+
+
+
+
+
+
+
+
+// === REVIEWS PATCH v7: compact default, grow on expand, collapse back to clamp ===
+(function(){
+  const section = document.querySelector('#reviews');
+  if(!section || section.dataset.rvPatchV7==='1') return;
+  section.dataset.rvPatchV7='1';
+  const grid = section.querySelector('.grid-3'); if(!grid) return;
+  const cards = Array.from(grid.querySelectorAll('.review')); if(!cards.length) return;
+
+  const LINES = 8;
+  const THRESH = 6;
+
+  function clampHeightPx(p){
+    const lh = parseFloat(getComputedStyle(p).lineHeight || '18');
+    return Math.round(lh * LINES + 2);
+  }
+  function naturalHeight(content){
+    const prev = content.style.maxHeight;
+    content.style.maxHeight = 'none';
+    const h = content.scrollHeight;
+    content.style.maxHeight = prev;
+    return h;
+  }
+
+  function setup(card){
+    const content = card.querySelector('.review-content');
+    const p = content ? content.querySelector('p') : null;
+    if(!content || !p) return;
+
+    // Reset state
+    content.classList.remove('expanded');
+    card.dataset.expanded = '0';
+    content.style.maxHeight = 'none';
+
+    const clampPx = clampHeightPx(p);
+    // Apply clamp for measuring overflow
+    content.style.maxHeight = clampPx + 'px';
+
+    // Need toggle only if overflow inside clamped content
+    const need = p.scrollHeight > p.clientHeight + THRESH;
+
+    let btn = content.querySelector('.review-toggle');
+    if(!need){
+      if(btn) btn.remove();
+      // short review: allow natural height (no clamp)
+      content.style.maxHeight = 'none';
+      return;
+    }
+
+    // Need toggle
+    if(!btn){
+      btn = document.createElement('button');
+      btn.className = 'review-toggle'; btn.type='button'; btn.textContent='Читать отзыв';
+      content.appendChild(btn);
+    } else {
+      const clone = btn.cloneNode(true); btn.replaceWith(clone); btn = clone;
+    }
+
+    function apply(){
+      const exp = card.dataset.expanded === '1';
+      if(exp){
+        content.classList.add('expanded');
+        content.style.maxHeight = naturalHeight(content) + 'px';
+        btn.textContent = 'Свернуть';
+      }else{
+        content.classList.remove('expanded');
+        content.style.maxHeight = clampPx + 'px';
+        btn.textContent = 'Читать отзыв';
+      }
+    }
+    btn.addEventListener('click', ()=>{
+      card.dataset.expanded = (card.dataset.expanded==='1') ? '0' : '1';
+      apply();
+    });
+
+    // Re-evaluate on resize / fonts ready
+    let t;
+    function recompute(){
+      const newClamp = clampHeightPx(p);
+      const exp = card.dataset.expanded === '1';
+      content.style.maxHeight = (exp ? naturalHeight(content) : newClamp) + 'px';
+      // If viewport change made text short, remove toggle and clear clamp
+      const stillOverflow = p.scrollHeight > p.clientHeight + THRESH;
+      if(!stillOverflow){
+        if(btn) btn.remove();
+        content.style.maxHeight = 'none';
+        card.dataset.expanded = '0';
+      }
+    }
+    window.addEventListener('resize', ()=>{ clearTimeout(t); t=setTimeout(recompute, 120); });
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(recompute); }
+
+    apply();
+  }
+
+  cards.forEach(setup);
+})();
+
+
+// === REVIEWS PATCH v8: collapse non-current card on slide change ===
+(function(){
+  const section = document.querySelector('#reviews');
+  if(!section || section.dataset.rvPatchV8==='1') return;
+  section.dataset.rvPatchV8='1';
+  const grid = section.querySelector('.grid-3'); if(!grid) return;
+  const cards = Array.from(grid.querySelectorAll('.review')); if(!cards.length) return;
+
+  function step(){
+    const f = cards[0]; const r = f.getBoundingClientRect();
+    const cs = getComputedStyle(grid);
+    const gap = parseFloat(cs.columnGap || cs.gap || 16);
+    return r.width + (isNaN(gap)?16:gap);
+  }
+  function currentIndex(){
+    return Math.max(0, Math.min(cards.length-1, Math.round(grid.scrollLeft / step())));
+  }
+
+  grid.addEventListener('scroll', ()=>{
+    if (grid.__rv_collapse_tick) return;
+    grid.__rv_collapse_tick = true;
+    requestAnimationFrame(()=>{
+      const idx = currentIndex();
+      // свернуть все карты, кроме текущей, если они развернуты
+      cards.forEach((card, i)=>{
+        if (i !== idx && card.dataset && card.dataset.expanded === '1'){
+          card.dataset.expanded = '0';
+          // найти контент и применить высоту clamp (в v7 логика в apply отсутствует вне области,
+          // поэтому рассчитаем заново на месте)
+          const content = card.querySelector('.review-content');
+          const p = content ? content.querySelector('p') : null;
+          if(content && p){
+            const lh = parseFloat(getComputedStyle(p).lineHeight || '18');
+            const clampPx = Math.round(lh * 8 + 2);
+            content.classList.remove('expanded');
+            content.style.maxHeight = clampPx + 'px';
+            const btn = content.querySelector('.review-toggle');
+            if(btn) btn.textContent = 'Читать отзыв';
+          }
+        }
+      });
+      grid.__rv_collapse_tick = false;
+    });
+  }, {passive:true});
+})();
+
+
+
+
+// === DOCTORS CAROUSEL — like services (multi-cards), arrows + autoplay forward, stop at last ===
+(function(){
+  const section = document.querySelector('#doctors');
+  if (!section || section.dataset.docCarousel2==='1') return;
+  let grid = section.querySelector('.grid-3.is-carousel');
+  if (!grid) return;
+
+  let slides = Array.from(grid.children).filter(el => el.classList && el.classList.contains('doctor'));
+  if (slides.length < 2) return;
+  section.dataset.docCarousel2 = '1';
+
+  // Clone grid to drop previous listeners if any (safe)
+  const clone = grid.cloneNode(true);
+  const prevLeft = grid.scrollLeft;
+  grid.parentNode.replaceChild(clone, grid);
+  grid = clone; grid.scrollLeft = prevLeft;
+  slides = Array.from(grid.children).filter(el => el.classList && el.classList.contains('doctor'));
+
+  const clamp = (n,a,b)=> Math.max(a, Math.min(b,n));
+  function cardStep(){
+    const first = grid.querySelector('.doctor');
+    if(!first) return 300;
+    const rect = first.getBoundingClientRect();
+    const cs = getComputedStyle(grid);
+    const gap = parseFloat(cs.columnGap || cs.gap || 16);
+    return rect.width + (isNaN(gap) ? 16 : gap);
+  }
+  let STEP = cardStep();
+  const ro = new ResizeObserver(()=> { STEP = cardStep(); });
+  ro.observe(grid);
+
+  const index = ()=> clamp(Math.round(grid.scrollLeft / STEP), 0, slides.length-1);
+  const setIndex = (i, smooth=true)=>{
+    const k = clamp(i, 0, slides.length-1);
+    grid.scrollTo({ left: k*STEP, behavior: smooth ? 'smooth' : 'auto' });
+    sync();
+  };
+  const atStart = ()=> grid.scrollLeft <= 2;
+  const atEnd   = ()=> grid.scrollLeft >= (grid.scrollWidth - grid.clientWidth - 2);
+
+  const prev = section.querySelector('.doctors-nav .prev');
+  const next = section.querySelector('.doctors-nav .next');
+  const sync = ()=>{ if(prev) prev.disabled = atStart(); if(next) next.disabled = atEnd(); };
+
+  if (prev) prev.addEventListener('click', e=>{ e.preventDefault(); e.stopImmediatePropagation(); if(!atStart()) setIndex(index()-1); });
+  if (next) next.addEventListener('click', e=>{ e.preventDefault(); e.stopImmediatePropagation(); if(!atEnd())   setIndex(index()+1); });
+
+  grid.addEventListener('scroll', ()=>{
+    if (grid.__doc_tick) return;
+    grid.__doc_tick = true;
+    requestAnimationFrame(()=>{ sync(); grid.__doc_tick=false; });
+  }, {passive:true});
+
+  // Autoplay forward, stop at last (pause on hover/focus/hidden)
+  const reduce   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const INTERVAL = 5200;
+  let timer = null;
+  const tick  = ()=> { if (atEnd()){ stop(); return; } setIndex(index()+1, !reduce); };
+  const start = ()=> { if(timer || section.matches(':hover') || section.matches(':focus-within')) return; timer = setInterval(tick, INTERVAL); };
+  const stop  = ()=> { if (timer){ clearInterval(timer); timer=null; } };
+  section.addEventListener('mouseenter', stop);
+  section.addEventListener('mouseleave', start);
+  section.addEventListener('focusin', stop);
+  section.addEventListener('focusout', start);
+  document.addEventListener('visibilitychange', ()=>{ if(document.hidden) stop(); else start(); });
+
+  // Init
+  sync();
+  setIndex(index(), false);
+  start();
+})();

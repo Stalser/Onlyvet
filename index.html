@@ -89,7 +89,7 @@
 <section id="doctors">
 <div class="container">
 <div class="section-head"><h2>Врачи</h2><p class="muted">Опытные специалисты по направлениям.</p></div>
-<div class="grid-3">
+<div class="grid-3 is-carousel">
 <div class="doctor">
 <img alt="Портрет Анны Котовой" class="avatar-img" loading="lazy" src="assets/photos/doctor-anna.jpg"/>
 <div>
@@ -129,7 +129,29 @@
 <button class="btn mini open-book">Записаться</button>
 </div>
 </div>
+<div class="doctor">
+<div aria-label="Фото будет добавлено позже" class="avatar-placeholder avatar-img">КА</div>
+<div>
+<strong>Кирилл Абрамов</strong>
+<span class="muted">Ветврач‑кардиолог, УЗ‑диагностика • 8 лет</span>
+<div class="chips">
+<span class="chip">Кардиология</span><span class="chip">ЭхоКГ</span>
 </div>
+<span class="hint">RUVet № 000003</span>
+<button class="btn mini open-book">Записаться</button>
+</div>
+</div><div class="doctor">
+<div aria-label="Фото будет добавлено позже" class="avatar-placeholder avatar-img">ДР</div>
+<div>
+<strong>Дарья Романова</strong>
+<span class="muted">Ветврач‑эндокринолог, терапевт • 6 лет</span>
+<div class="chips">
+<span class="chip">Эндокринология</span><span class="chip">Терапия</span>
+</div>
+<span class="hint">RUVet № 000004</span>
+<button class="btn mini open-book">Записаться</button>
+</div>
+</div></div><div class="doctors-nav"><button aria-label="Назад" class="sc-btn prev" type="button">◀</button><button aria-label="Вперёд" class="sc-btn next" type="button">▶</button></div>
 </div>
 </section>
 <section id="reviews">
@@ -139,6 +161,13 @@
 <div class="review"><div class="user"><img alt="" class="img-cover" loading="lazy" src="assets/photos/review-dog.jpg"/></div><div class="review-content"><p>«Помогли понять, что делать ночью, когда у пса началась рвота. Спокойно объяснили и подсказали, когда ехать в клинику.»</p><span class="hint">— Марина</span></div></div>
 <div class="review"><div class="user"><img alt="" class="img-cover" loading="lazy" src="assets/photos/review-cat.jpg"/></div><div class="review-content"><p>«Дали план ухода после стерилизации, всё по пунктам. Большое спасибо врачу.»</p><span class="hint">— Алексей</span></div></div>
 <div class="review"><div class="user"><img alt="" class="img-cover" loading="lazy" src="assets/photos/review-owner.jpg"/></div><div class="review-content"><p>«Удобно: запись, оплата и видео — в одном месте. Повторный визит оформили за минуту.»</p><span class="hint">— Екатерина</span></div></div>
+<div class="review" data-rating="5">
+<div class="user"><img alt="Отзыв владельца" class="img-cover" decoding="async" loading="lazy" src="assets/photos/review-owner.jpg"/></div>
+<div class="review-content">
+<p>В этой клинике работает отличная команда, а главное знающие и любившие свою работу - специалисты! Клиника оборудована всем необходимым. За один день мы с нашей кошкой Машей сдали кровь и получили в считанные минуты анализы, нам сделали рентген, нам сделали ФГДС и врачи нам изъяли из нашего горлышка куриную косточку, которая ей не давала есть. Измученное и уставшее животное быстро отошло от успокоительного и уже вечером кушала с диким аппетитом влажный корм, запивая все молочком! Огромную Благодарность выражаем Владиславу Евгеньевичу и Дарье Павловне! Вы огромные молодцы и очень талантливые люди!!! Всему коллективу СПАСИБО за Ваш нелегкий, но очень нужный труд!!! Здоровья Вам, вашим семьям и конечно же пушистым посетителям!!! Очень Вам благодарны)))</p>
+<span class="hint">— Семья М.</span>
+</div>
+</div>
 </div><div class="reviews-nav"><button aria-label="Предыдущий отзыв" class="reviews-btn prev" type="button">◀</button><button aria-label="Следующий отзыв" class="reviews-btn next" type="button">▶</button></div>
 </div>
 </section>
@@ -168,21 +197,24 @@
 <form id="contact-form" novalidate="">
 <div><label for="name">Имя</label><input id="name" name="name" placeholder="Ваше имя" required="" type="text"/></div>
 <div><label for="phone">Телефон</label><input id="phone" name="phone" placeholder="+7 (___) ___-__-__" required="" type="tel"/></div>
+<div>
+<label for="email">Email</label>
+<input autocomplete="email" id="email" inputmode="email" name="email" placeholder="name@example.com" required="" type="email"/>
+</div>
 <div><label for="msg">Сообщение</label><textarea id="msg" name="msg" placeholder="Кратко опишите вопрос" rows="4"></textarea></div>
 <div></div>
-<div class="form-agree">
+<div class="form-footer"><div class="form-agree">
 <label class="checkbox-label" for="pdn">
 <input id="pdn" required="" type="checkbox"/>
 <span>Я даю согласие на обработку персональных данных</span>
 </label>
 <p class="hint">
-    Данные хранятся в РФ. <a href="#!" rel="noopener" target="_blank">Политика обработки ПДн</a>
+    Данные хранятся в соответствии с законодательством РФ.
+    <a href="#!" rel="noopener" target="_blank">Политика обработки ПДн</a>
 </p>
-</div>
-<div class="form-actions">
+</div><div class="form-actions">
 <button class="btn submit-btn" disabled="" type="submit">Отправить</button>
-</div>
-</form>
+</div></div></form>
 </div>
 <!-- Контакты -->
 <div class="container" id="info">
