@@ -478,3 +478,81 @@ document.getElementById('year').textContent = new Date().getFullYear();
   setIndex(index(), false);
   start();
 })();
+
+
+// === HOWTO COLLAPSIBLE: smooth expand/collapse ===
+(function(){
+  const section = document.getElementById('howto');
+  if (!section || section.dataset.howtoCollapse === '1') return;
+  section.dataset.howtoCollapse = '1';
+
+  const toggle = section.querySelector('#howto-toggle');
+  const box = section.querySelector('#howto-collapsible');
+  if (!toggle || !box) return;
+
+  function setMax(to){
+    box.style.maxHeight = to + 'px';
+  }
+  function natural(){
+    const prev = box.style.maxHeight;
+    box.style.maxHeight = 'none';
+    const h = box.scrollHeight;
+    box.style.maxHeight = prev;
+    return h;
+  }
+
+  // init collapsed
+  setMax(0);
+  toggle.setAttribute('aria-expanded','false');
+  toggle.textContent = 'Развернуть раздел';
+  setMax(natural());
+  toggle.setAttribute('aria-expanded','true');
+
+  let t;
+  function onResize(){
+    clearTimeout(t);
+    t = setTimeout(()=>{
+      if (toggle.getAttribute('aria-expanded') === 'true'){
+        setMax(natural());
+      }
+    }, 120);
+  }
+  window.addEventListener('resize', onResize);
+  if (document.fonts && document.fonts.ready){ document.fonts.ready.then(onResize); }
+
+  toggle.addEventListener('click', ()=>{
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    if (expanded){
+      // collapse
+      setMax(natural()); // ensure correct current height for animation start
+      requestAnimationFrame(()=>{ setMax(0); });
+      toggle.setAttribute('aria-expanded','false');
+      toggle.textContent = 'Развернуть раздел';
+    } else {
+      // expand
+      const h = natural();
+      setMax(0); // start from 0 to animate
+      requestAnimationFrame(()=>{ setMax(h); });
+      toggle.setAttribute('aria-expanded','true');
+      toggle.textContent = 'Свернуть раздел';
+    }
+  });
+})();
+
+
+// === HOWTO: force collapsed by default & correct button label ===
+(function(){
+  const t = document.querySelector('#howto #howto-toggle');
+  const b = document.querySelector('#howto #howto-collapsible');
+  if(!t || !b) return;
+  function collapse(){
+    b.style.maxHeight = '0px';
+    t.setAttribute('aria-expanded','false');
+    t.textContent = 'Развернуть раздел';
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', collapse);
+  } else {
+    collapse();
+  }
+})();
