@@ -1484,7 +1484,7 @@ body, p, li, a, input, textarea, button, label, small, .muted, .hint{
 html, body{ background:var(--bg); color:var(--ink); }
 h1,h2,h3,.section-title{ color:var(--ink); letter-spacing:.1px; }
 .muted,.hint{ color:var(--muted); }
-a{ color: var(--accent); } a:hover{ color: var(--brand); text-decoration:none; }
+a{ color: var(--brand); } a:hover{ color: var(--brand); text-decoration:none; }
 #benefits{ background: transparent !important; }
 
 /* === BUTTONS: coral CTA + readable ghost === */
@@ -1494,3 +1494,19 @@ a{ color: var(--accent); } a:hover{ color: var(--brand); text-decoration:none; }
 .btn:not(.ghost):hover, .btn:not(.ghost):focus{ background:#ff8f79; color:#fff; transform: translateY(-1px); box-shadow:0 6px 16px rgba(247,118,92,.28); }
 .btn.ghost, .btn.ghost:link, .btn.ghost:visited{ background:transparent !important; color:var(--ink) !important; border:1px solid var(--line); border-radius: var(--r); }
 .btn.ghost:hover, .btn.ghost:focus{ background:rgba(0,0,0,.05) !important; color:var(--ink) !important; text-decoration:none; }
+
+/* Added by patch: focus-visible for accessibility */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Ensure base text uses high-contrast ink color */
+:where(body) {
+  color: var(--ink);
+}
+
+/* Avoid low-contrast accent/danger on small text over white backgrounds */
+:where(p, li, small, .text, .caption) {
+  color: var(--ink);
+}

@@ -1,15 +1,49 @@
 <!DOCTYPE html>
 
 <html lang="ru">
-<head>
+<head><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="True" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>OnlyVet — Онлайн-ветклиника</title>
 <meta content="OnlyVet — онлайн-ветеринарная клиника: быстрые консультации, триаж, повторные визиты, рекомендации по уходу. Работает на базе Vetmanager." name="description"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="styles.css?v=rv2" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/></head>
+<link href="styles.css?v=rv2" rel="stylesheet"/><link href="assets/favicon.png" rel="icon" type="image/png"/><meta content="OnlyVet — Онлайн-ветклиника" property="og:title"/><meta content="OnlyVet — онлайн-ветеринарная клиника: быстрые консультации, триаж, повторные визиты, рекомендации по уходу. Работает на базе Vetmanager." property="og:description"/><meta content="website" property="og:type"/><meta content="assets/og-image.jpg" property="og:image"/><style>
+/* --- OnlyVet Socials Section (brandbook-friendly) --- */
+:root {
+  --socials-bg: #F8FBFF;
+  --socials-ring: var(--brand, #2563EB);
+  --socials-ink: var(--ink, #0F172A);
+  --socials-muted: var(--muted, #475569);
+  --radius: var(--radius-lg, 16px);
+}
+
+.socials { background: var(--socials-bg); padding: clamp(32px, 6vw, 64px) 16px; border-top: 1px solid var(--line, #E2E8F0); }
+.socials__inner { max-width: 1160px; margin: 0 auto; }
+.socials__title { font-family: var(--font-display, Montserrat, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif); font-weight: 700; letter-spacing: -0.01em; color: var(--socials-ink); font-size: clamp(22px, 3vw, 32px); margin: 0 0 8px; }
+.socials__lead { color: var(--socials-muted); margin: 0 0 24px; max-width: 68ch; }
+.socials__grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+@media (max-width: 1024px) { .socials__grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px)  { .socials__grid { grid-template-columns: 1fr; } }
+
+.socials__card { display: flex; gap: 12px; align-items: center; background: var(--card, #fff); color: var(--socials-ink); border: 1px solid var(--line, #E2E8F0); padding: 16px; border-radius: var(--radius); text-decoration: none; position: relative; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.socials__card:hover { transform: translateY(-1px); border-color: var(--socials-ring); box-shadow: 0 6px 18px rgba(37,99,235,.12); }
+.socials__card[aria-disabled="true"] { cursor: default; opacity: .8; }
+.socials__icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; color: #fff; background: var(--brand, #2563EB); }
+.socials__content { display: grid; gap: 4px; }
+.socials__name { font-weight: 600; }
+.socials__handle { color: var(--socials-muted); font-size: .9375rem; }
+.socials__note { margin-top: 16px; color: var(--socials-muted); font-size: .875rem; }
+</style><style>
+/* --- OnlyVet Socials: boxed container adjustments --- */
+.socials { background: transparent; padding: clamp(32px, 6vw, 64px) 16px; }
+.socials__inner { max-width: 1160px; margin: 0 auto; }
+.socials__box { background: var(--card, #fff); border: 1px solid var(--line, #E2E8F0);
+  border-radius: var(--radius-lg, 16px); box-shadow: var(--shadow-md, 0 10px 30px rgba(2,6,23,.06));
+  padding: clamp(20px, 3vw, 28px); }
+</style><style>
+/* Fix: remove top border above socials */
+.socials { border-top: none !important; }
+</style></head>
 <body>
 <header aria-label="Главная навигация">
 <div class="container nav">
@@ -52,7 +86,7 @@
 </div>
 </div>
 <figure class="hero-visual">
-<img alt="Ветеринарный врач осматривает питомца в клинике" class="img-cover" src="assets/photos/hero.jpg"/>
+<img alt="Ветеринарный врач осматривает питомца в клинике" class="img-cover" loading="lazy" sizes="(max-width: 768px) 100vw, 1200px" src="assets/photos/hero.jpg" srcset="assets/photos/hero-480w.jpg 480w, assets/photos/hero-768w.jpg 768w"/>
 </figure>
 </div>
 </section>
@@ -266,7 +300,63 @@
 </div>
 </div>
 </section>
-<section id="contact">
+<section aria-labelledby="socials-title" class="socials" id="socials">
+<div class="socials__inner"><div class="socials__box">
+<h2 class="socials__title" id="socials-title">Мы в социальных сетях</h2>
+<p class="socials__lead">Подпишитесь, чтобы первыми узнавать о новостях клиники, разборах клинических случаев и акциях. Страницы в процессе запуска — кнопки активируются по мере публикации.</p>
+<ul class="socials__grid" role="list">
+<li class="socials__item">
+<a aria-disabled="true" class="socials__card" href="#" tabindex="-1">
+<span aria-hidden="true" class="socials__icon">
+<!-- Telegram SVG -->
+<svg fill="currentColor" focusable="false" height="28" viewbox="0 0 24 24" width="28"><path d="M9.036 15.708l-.376 5.303c.538 0 .77-.231 1.048-.508l2.516-2.403 5.215 3.819c.956.528 1.637.251 1.899-.885l3.44-16.09.001-.001c.306-1.421-.511-1.974-1.445-1.626L1.115 9.614c-1.385.537-1.364 1.308-.236 1.658l5.29 1.651 12.29-7.755c.578-.351 1.106-.157.672.194"></path></svg>
+</span>
+<div class="socials__content">
+<span class="socials__name">Telegram</span>
+<span class="socials__handle">@onlyvet — скоро</span>
+</div>
+</a>
+</li>
+<li class="socials__item">
+<a aria-disabled="true" class="socials__card" href="#" tabindex="-1">
+<span aria-hidden="true" class="socials__icon">
+<!-- VK SVG -->
+
+<svg aria_hidden="true" fill="currentColor" focusable="false" height="28" viewBox="0 0 24 24" width="28"><path d="M21.579 6.855c.14-.465 0-.806-.662-.806h-2.193c-.558 0-.813.295-.953.619 0 0-1.115 2.719-2.695 4.482-.51.513-.743.675-1.021.675-.139 0-.341-.162-.341-.627V6.855c0-.558-.161-.806-.626-.806H9.642c-.348 0-.558.258-.558.504 0 .528.79.65.871 2.138v3.228c0 .707-.127.836-.407.836-.743 0-2.551-2.729-3.624-5.853-.209-.607-.42-.852-.98-.852H2.752c-.627 0-.752.295-.752.619 0 .582.743 3.462 3.461 7.271 1.812 2.601 4.363 4.011 6.687 4.011 1.393 0 1.565-.313 1.565-.853v-1.966c0-.626.133-.752.574-.752.324 0 .882.164 2.183 1.417 1.486 1.486 1.732 2.153 2.567 2.153h2.192c.626 0 .939-.313.759-.931-.197-.615-.907-1.51-1.849-2.569-.512-.604-1.277-1.254-1.51-1.579-.325-.419-.231-.604 0-.976.001.001 2.672-3.761 2.95-5.04z"></path></svg></span>
+<div class="socials__content">
+<span class="socials__name">ВКонтакте</span>
+<span class="socials__handle">vk.com/onlyvet — скоро</span>
+</div>
+</a>
+</li>
+<li class="socials__item">
+<a aria-disabled="true" class="socials__card" href="#" tabindex="-1">
+<span aria-hidden="true" class="socials__icon">
+<!-- YouTube SVG -->
+<svg fill="currentColor" focusable="false" height="28" viewbox="0 0 24 24" width="28"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.4.6A3 3 0 00.5 6.2C0 8 0 12 0 12s0 4 .5 5.8a3 3 0 002.1 2.1c1.8.6 9.4.6 9.4.6s7.6 0 9.4-.6a3 3 0 002.1-2.1C24 16 24 12 24 12s0-4-.5-5.8zM9.6 15.6V8.4L16 12l-6.4 3.6z"></path></svg>
+</span>
+<div class="socials__content">
+<span class="socials__name">YouTube</span>
+<span class="socials__handle">OnlyVet — скоро</span>
+</div>
+</a>
+</li>
+<li class="socials__item">
+<a aria-disabled="true" class="socials__card" href="#" tabindex="-1">
+<span aria-hidden="true" class="socials__icon">
+<!-- Instagram-like SVG (placeholder) -->
+<svg fill="currentColor" focusable="false" height="28" viewbox="0 0 24 24" width="28"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 4.5A5.5 5.5 0 1112 19a5.5 5.5 0 010-11.5zm0 2A3.5 3.5 0 1015.5 14 3.5 3.5 0 0012 8.5zM18 6.3a1.2 1.2 0 11-1.2 1.2A1.2 1.2 0 0118 6.3z"></path></svg>
+</span>
+<div class="socials__content">
+<span class="socials__name">Instagram*</span>
+<span class="socials__handle">@onlyvet — скоро</span>
+</div>
+</a>
+</li>
+</ul>
+<p class="socials__note">* организация может иметь ограничения на территории РФ.</p>
+</div></div>
+</section><section id="contact">
 <!-- Обратная связь -->
 <div class="container" id="feedback">
 <div class="section-head"><h2>Обратная связь</h2><p class="muted">Пишите — ответим быстро в часы работы.</p></div>
@@ -281,7 +371,7 @@
 <div></div>
 <div class="form-footer"><div class="form-agree">
 <label class="checkbox-label" for="pdn">
-<input id="pdn" required="" type="checkbox"/>
+<input id="pdn" name="pdn" required="" type="checkbox"/>
 <span>Я даю согласие на обработку персональных данных</span>
 </label>
 <p class="hint">
