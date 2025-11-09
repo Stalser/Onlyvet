@@ -1464,3 +1464,13 @@ button.submit-btn:disabled {
 }
 
 #howto .step::after { display:none !important; }
+
+
+/* === ONLYVET FONTS (Montserrat for headings, Inter for body) === */
+h1, h2, h3, .section-title{
+  font-family: 'Montserrat', Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 700;
+}
+body, p, li, a, input, textarea, button, label, small, .muted, .hint{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
