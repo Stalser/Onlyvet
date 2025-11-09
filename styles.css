@@ -1510,3 +1510,34 @@ a{ color: var(--brand); } a:hover{ color: var(--brand); text-decoration:none; }
 :where(p, li, small, .text, .caption) {
   color: var(--ink);
 }
+
+
+/* === CONTACT SPOILER (scoped) === */
+#contact .section-toggle{
+  display:block;
+  margin: 18px auto 16px auto;
+  padding: 14px 26px;
+  min-width: 220px;
+  border:none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  color:#fff;
+  background: linear-gradient(135deg, #F7765C, #7B8CFF);
+  box-shadow: 0 8px 18px rgba(123,140,255,.18), 0 3px 8px rgba(247,118,92,.20);
+  cursor:pointer;
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+#contact .section-toggle:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(123,140,255,.24), 0 6px 14px rgba(247,118,92,.28);
+}
+
+#contact .collapsible{
+  overflow:hidden;
+  max-height:0;             /* collapsed by default */
+  opacity: 0;
+  transition: max-height .42s cubic-bezier(.22,.61,.36,1), opacity .28s ease;
+}
+#contact .collapsible.open,
+#contact .collapsible.opening{ opacity:1; }

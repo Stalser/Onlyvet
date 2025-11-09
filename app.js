@@ -556,3 +556,55 @@ document.getElementById('year').textContent = new Date().getFullYear();
     collapse();
   }
 })();
+
+// === CONTACT SPOILER (scoped, smooth) ===
+(function(){
+  const root = document.querySelector('#contact #feedback') || document.querySelector('#contact');
+  if(!root || root.dataset.contactSpoiler==='1') return;
+  root.dataset.contactSpoiler = '1';
+  const btn = root.querySelector('#contact-toggle');
+  const box = root.querySelector('#contact-collapse');
+  if(!btn || !box) return;
+
+  function natural(h){
+    const prev = h.style.maxHeight;
+    h.style.maxHeight = 'none';
+    const res = h.scrollHeight;
+    h.style.maxHeight = prev || '0px';
+    return res;
+  }
+  function expand(){
+    box.classList.add('opening');
+    box.style.maxHeight = natural(box) + 'px';
+    btn.textContent = 'Свернуть';
+    btn.setAttribute('aria-expanded','true');
+    const onEnd = ()=>{
+      box.classList.remove('opening');
+      box.classList.add('open');
+      box.removeEventListener('transitionend', onEnd);
+    };
+    box.addEventListener('transitionend', onEnd);
+  }
+  function collapse(){
+    box.classList.remove('open');
+    box.style.maxHeight = '0px';
+    btn.textContent = 'Развернуть раздел';
+    btn.setAttribute('aria-expanded','false');
+  }
+
+  // start collapsed
+  collapse();
+
+  btn.addEventListener('click', ()=>{
+    (btn.getAttribute('aria-expanded')==='true') ? collapse() : expand();
+  });
+
+  // keep height on resize if opened
+  let t;
+  window.addEventListener('resize', ()=>{
+    if(btn.getAttribute('aria-expanded')==='true'){
+      clearTimeout(t);
+      t = setTimeout(()=>{ box.style.maxHeight = natural(box)+'px'; }, 120);
+    }
+  });
+})();
